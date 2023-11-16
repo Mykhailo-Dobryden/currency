@@ -22,7 +22,8 @@ def contact_us_list(request):
 
     for contact in contacts:
         resuslts.append(
-            f"ID: {contact.id}, email_from: {contact.email_from}, subject: {contact.subject}, message: {contact.message}"
+            f"ID: {contact.id}, email_from: {contact.email_from}, "
+            f"subject: {contact.subject}, message: {contact.message}"
         )
 
     return HttpResponse("<br>".join(resuslts))
