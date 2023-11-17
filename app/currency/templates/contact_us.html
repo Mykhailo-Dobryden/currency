@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{%  block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+
+    <table class="table mt-5 table-bordered table-striped table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>id</th>
+                <th>email_from</th>
+                <th>subject</th>
+                <th>message</th>
+            </tr>
+        </thead>
+
+    {% for contact in contacts %}
+        <tr>
+              <td>{{ contact.id }}</td>
+              <td>{{ contact.email_from }}</td>
+              <td>{{ contact.subject }}</td>
+              <td>{{ contact.message }}</td>
+        </tr>
+    {% endfor %}
+
+    </table>
+
+{% endblock content %}

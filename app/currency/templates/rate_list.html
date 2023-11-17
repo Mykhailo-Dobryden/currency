@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{%  block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <table class="table mt-5 table-bordered table-striped table-hover w-50">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Buy</th>
+                <th>Sell</th>
+            </tr>
+        </thead>
+
+    {% for rate in rates %}
+        <tr>
+              <td>{{ rate.id }}</td>
+              <td>{{ rate.buy }}</td>
+              <td>{{ rate.sell }}</td>
+        </tr>
+    {% endfor %}
+
+    </table>
+
+{% endblock content %}
