@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{%  block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <table class="table mt-5 table-bordered table-striped table-hover w-50">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Source URL</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>{{ source.id }}</td>
+            <td>{{ source.name }}</td>
+            <td>{{ source.source_url }}</td>
+            <td>{{ source.created }}</td>
+        </tr>
+    </table>
+
+{% endblock content %}

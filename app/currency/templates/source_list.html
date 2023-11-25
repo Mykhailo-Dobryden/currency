@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{%  block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <p class="mt-5">
+        <a href="/source/create" class="btn btn-primary">Add Source</a>
+    </p>
+    <table class="table mt-5 table-bordered table-striped table-hover w-50">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Source URL</th>
+            </tr>
+        </thead>
+
+        {% for source in sources %}
+            <tr>
+                <td>{{ source.id }}</td>
+                <td>{{ source.name }}</td>
+                <td>{{ source.source_url }}</td>
+                <td><a href="/source/update/{{ source.id }}/">Edit</a></td>
+                <td><a href="/source/delete/{{ source.id }}/">Delete</a></td>
+                <td><a href="/source/detail/{{ source.id }}/">Details</a></td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+
+{% endblock content %}
