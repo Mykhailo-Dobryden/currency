@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{%  block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <table class="table mt-5 table-bordered table-striped table-hover w-50">
+        <thead class="thead-light">
+            <tr>
+                <th>Currency Type</th>
+                <th>BUY</th>
+                <th>SELL</th>
+                <th>Created</th>
+                <th>Currency Supplier</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>{{ rate.currency_type }}</td>
+            <td>{{ rate.buy }}</td>
+            <td>{{ rate.sell }}</td>
+            <td>{{ rate.created }}</td>
+            <td>{{ rate.source }}</td>
+        </tr>
+    </table>
+
+{% endblock content %}
