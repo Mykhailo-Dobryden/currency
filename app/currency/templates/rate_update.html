@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}{{ title }}{% endblock %}
+
+{% block title %}{{ title }}{% endblock title %}
 
 {% block content %}
     <h1>{{ title }}</h1>
@@ -9,4 +10,5 @@
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
-{% endblock %}
+
+{% endblock content %}

@@ -5,6 +5,12 @@
 {% endblock title %}
 
 {% block content %}
+    <h1 class="mt-5">Rates List</h1>
+
+    <p class="mt-5">
+        <a href="/rate/create" class="btn btn-primary">Add Source</a>
+    </p>
+
     <table class="table mt-5 table-bordered table-striped table-hover w-50">
         <thead class="thead-light">
             <tr>
@@ -16,9 +22,12 @@
 
     {% for rate in rates %}
         <tr>
-              <td>{{ rate.id }}</td>
-              <td>{{ rate.buy }}</td>
-              <td>{{ rate.sell }}</td>
+          <td>{{ rate.id }}</td>
+          <td>{{ rate.buy }}</td>
+          <td>{{ rate.sell }}</td>
+          <td><a href="/rate/update/{{ rate.id }}/">Edit</a></td>
+          <td><a href="/rate/delete/{{ rate.id }}/">Delete</a></td>
+          <td><a href="/rate/details/{{ rate.id }}/">Details</a></td>
         </tr>
     {% endfor %}
 
