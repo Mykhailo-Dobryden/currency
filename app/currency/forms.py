@@ -1,5 +1,5 @@
 from django import forms
-from currency.models import Source, Rate
+from currency.models import Source, Rate, ContactUs
 
 
 class SourceCreateForm(forms.ModelForm):
@@ -16,3 +16,9 @@ class RateCreateForm(forms.ModelForm):
         labels = {
             'source': 'Currency Supplier'
         }
+
+
+class ContactUsCreateForm(forms.ModelForm):
+    class Meta:
+        model = ContactUs
+        fields = ('email_from', 'subject', 'message')

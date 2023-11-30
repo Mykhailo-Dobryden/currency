@@ -13,6 +13,7 @@ class ContactUs(models.Model):
     email_from = models.EmailField()
     subject = models.CharField(max_length=100)
     message = models.TextField()
+    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
 
 class Source(models.Model):
