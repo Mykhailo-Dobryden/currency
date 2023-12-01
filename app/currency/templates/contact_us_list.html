@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{%  block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+
+    <h1 class="mt-5">{{ title }}</h1>
+
+    <p>
+        <a href="{% url 'currency:contactus-create'%}" class="btn btn-primary">Contact Us</a>
+    </p>
+
+    <table class="table mt-5 table-bordered table-striped table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>id</th>
+                <th>email_from</th>
+                <th>subject</th>
+                <th>message</th>
+            </tr>
+        </thead>
+
+    {% for contact in object_list %}
+        <tr>
+          <td>{{ contact.id }}</td>
+          <td>{{ contact.email_from }}</td>
+          <td>{{ contact.subject }}</td>
+          <td>{{ contact.message }}</td>
+          <td><a href="{% url 'currency:contactus-update' contact.id %}">Edit</a></td>
+          <td><a href="{% url 'currency:contactus-delete' contact.id %}">Delete</a></td>
+          <td><a href="{% url 'currency:contactus-details' contact.id %}">Details</a></td>
+
+        </tr>
+    {% endfor %}
+
+    </table>
+
+{% endblock content %}

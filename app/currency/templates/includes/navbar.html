@@ -2,13 +2,16 @@
     <div>
         <ul class="nav">
             <li>
-                <a href="/rate/list" class="nav-link">Rates</a>
+                <a href="{% url 'index' %}" class="nav-link">Home</a>
             </li>
             <li>
-                <a href="/contactus/list/" class="nav-link">Contacts List</a>
+                <a href="{% url 'currency:rate-list' %}" class="nav-link">Rates</a>
             </li>
             <li>
-                <a href="/source/list/" class="nav-link">Sources List</a>
+                <a href="{% url 'currency:contactus-list' %}" class="nav-link">Contacts List</a>
+            </li>
+            <li>
+                <a href="{% url 'currency:source-list' %}" class="nav-link">Sources List</a>
             </li>
         </ul>
     </div>
