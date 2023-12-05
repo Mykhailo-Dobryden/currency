@@ -2,6 +2,8 @@ Django==4.2.7
 django-extensions
 ipython
 django-debug-toolbar
+django-admin-rangefilter
+django-import-export
 
 #flake8
 flake8

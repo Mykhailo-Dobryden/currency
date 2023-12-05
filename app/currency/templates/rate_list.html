@@ -17,6 +17,7 @@
                 <th>ID</th>
                 <th>Buy</th>
                 <th>Sell</th>
+                <th>Currency</th>
             </tr>
         </thead>
 
@@ -25,6 +26,7 @@
           <td>{{ rate.id }}</td>
           <td>{{ rate.buy }}</td>
           <td>{{ rate.sell }}</td>
+          <td>{{ rate.get_currency_type_display }}</td>
           <td><a href="{% url 'currency:rate-update' rate.id %}">Edit</a></td>
           <td><a href="{% url 'currency:rate-delete' rate.id %}">Delete</a></td>
           <td><a href="{% url 'currency:rate-details' rate.id %}">Details</a></td>
