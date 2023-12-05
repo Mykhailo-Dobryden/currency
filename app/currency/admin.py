@@ -59,10 +59,11 @@ class ContactUsAdmin(admin.ModelAdmin):
 
     list_display = (
         'id',
+        'created',
+        'name',
         'email_from',
         'subject',
-        'message',
-        'created',
+        'body',
     )
 
     def has_delete_permission(self, request, obj=None):
