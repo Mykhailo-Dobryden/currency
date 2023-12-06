@@ -24,11 +24,11 @@ class Rate(models.Model):
 
 
 class ContactUs(models.Model):
-    created = models.DateTimeField(_('Created'), auto_now_add=True, blank=True, null=True)
-    name = models.CharField(_('Name'), max_length=64, blank=True, null=True)
+    created = models.DateTimeField(_('Created'), auto_now_add=True, blank=False, null=True)
+    name = models.CharField(_('Name'), max_length=64, blank=False, null=True)
     email_from = models.EmailField(_('E-mail From'), max_length=128)
     subject = models.CharField(_('Subject'), max_length=256)
-    body = models.CharField(_('Body'), max_length=250, blank=True, null=True)
+    body = models.CharField(_('Body'), max_length=250, blank=False, null=True)
 
     class Meta:
         verbose_name = 'Contact Us'
