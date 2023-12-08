@@ -21,4 +21,11 @@ class RateCreateForm(forms.ModelForm):
 class ContactUsCreateForm(forms.ModelForm):
     class Meta:
         model = ContactUs
-        fields = ('email_from', 'subject', 'message')
+        fields = ('email_from', 'name', 'subject', 'body', )
+
+        labels = {
+            'email_from': 'E-mail',
+            'name': 'Name',
+            'subject': 'Subject',
+            'body': 'Message',
+        }

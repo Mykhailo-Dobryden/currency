@@ -2,7 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from rangefilter.filters import DateRangeFilterBuilder
 
-from currency.models import Rate, Source, ContactUs
+from currency.models import Rate, Source, ContactUs, RequestResponseLog
 
 
 @admin.register(Rate)
@@ -59,10 +59,37 @@ class ContactUsAdmin(admin.ModelAdmin):
 
     list_display = (
         'id',
+        'created',
+        'name',
         'email_from',
         'subject',
-        'message',
+        'body',
+    )
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(RequestResponseLog)
+class RequestResponseLogAdmin(ImportExportModelAdmin):
+    list_display = (
+        'id',
         'created',
+        'path',
+        'request_method',
+        'time',
+    )
+
+    list_filter = (
+        'path',
+        'request_method',
+        ('created', DateRangeFilterBuilder()),
     )
 
     def has_delete_permission(self, request, obj=None):
