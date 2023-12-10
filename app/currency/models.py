@@ -16,8 +16,8 @@ class Rate(models.Model):
     source = models.CharField(_('Source'), max_length=255)
 
     class Meta:
-        verbose_name = 'Rate'
-        verbose_name_plural = 'Rates'
+        verbose_name = _('Rate')
+        verbose_name_plural = _('Rates')
 
     def __str__(self):
         return f'{self.get_currency_type_display()} - {self.created.strftime("%d.%m.%Y %H:%M")}'
@@ -31,8 +31,8 @@ class ContactUs(models.Model):
     body = models.CharField(_('Body'), max_length=250, blank=False, null=True)
 
     class Meta:
-        verbose_name = 'Contact Us'
-        verbose_name_plural = 'Contact Us'
+        verbose_name = _('Contact Us')
+        verbose_name_plural = _('Contact Us')
 
     def __str__(self):
         return self.subject
@@ -54,5 +54,5 @@ class RequestResponseLog(models.Model):
     time = models.DecimalField(_('Response Time'), max_digits=10, decimal_places=7)
 
     class Meta:
-        verbose_name = 'Request Response Log'
-        verbose_name_plural = 'Request Response Logs'
+        verbose_name = _('Request Response Log')
+        verbose_name_plural = _('Request Response Logs')
