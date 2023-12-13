@@ -1,21 +1,31 @@
 <nav class="navbar navbar-light bg-light">
     <div>
         <ul class="nav">
-            <li>
-                <a href="{% url 'index' %}" class="nav-link">Home</a>
-            </li>
-            <li>
-                <a href="{% url 'currency:rate-list' %}" class="nav-link">Rates</a>
-            </li>
-            <li>
-                <a href="{% url 'currency:contactus-list' %}" class="nav-link">Contacts List</a>
-            </li>
-            <li>
-                <a href="{% url 'currency:source-list' %}" class="nav-link">Sources List</a>
-            </li>
-            <li>
-                <a href="{% url 'admin:index' %}" class="nav-link">Admin</a>
-            </li>
+            <li><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+            <li><a href="{% url 'currency:rate-list' %}" class="nav-link">Rates</a></li>
+            <li><a href="{% url 'currency:contactus-list' %}" class="nav-link">Contacts List</a></li>
+            <li><a href="{% url 'currency:source-list' %}" class="nav-link">Sources List</a></li>
+
+            {% if request.user.is_superuser %}
+            <li><a href="{% url 'admin:index' %}" class="nav-link">Adminka</a></li>
+            {% endif %}
+
+
+            {% if request.user.is_authenticated %}
+
+                <li><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+                <li><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+
+            {% else %}
+
+                <li><a href="#" class="nav-link">Sign Up</a></li>
+                <li><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+
+            {% endif %}
+
         </ul>
     </div>
+    {% if request.user.is_authenticated %}
+        <p>Hi {{ request.user.username }}!</p>
+    {% endif %}
 </nav>

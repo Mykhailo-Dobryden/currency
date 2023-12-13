@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{%  block title %}
+{% block title %}
     Rates List
 {% endblock title %}
 
@@ -13,25 +13,31 @@
 
     <table class="table mt-5 table-bordered table-striped table-hover w-50">
         <thead class="thead-light">
-            <tr>
-                <th>ID</th>
-                <th>Buy</th>
-                <th>Sell</th>
-                <th>Currency</th>
-            </tr>
+        <tr>
+            <th>ID</th>
+            <th>Buy</th>
+            <th>Sell</th>
+            <th>Currency</th>
+        </tr>
         </thead>
 
-    {% for rate in object_list %}
-        <tr>
-          <td>{{ rate.id }}</td>
-          <td>{{ rate.buy }}</td>
-          <td>{{ rate.sell }}</td>
-          <td>{{ rate.get_currency_type_display }}</td>
-          <td><a href="{% url 'currency:rate-update' rate.id %}">Edit</a></td>
-          <td><a href="{% url 'currency:rate-delete' rate.id %}">Delete</a></td>
-          <td><a href="{% url 'currency:rate-details' rate.id %}">Details</a></td>
-        </tr>
-    {% endfor %}
+        {% for rate in object_list %}
+            <tr>
+                <td>{{ rate.id }}</td>
+                <td>{{ rate.buy }}</td>
+                <td>{{ rate.sell }}</td>
+                <td>{{ rate.get_currency_type_display }}</td>
+                {% if request.user.is_authenticated %}
+                    <td><a href="{% url 'currency:rate-details' rate.id %}">Details</a></td>
+
+                    {% if request.user.is_superuser %}
+                        <td><a href="{% url 'currency:rate-update' rate.id %}">Edit</a></td>
+                        <td><a href="{% url 'currency:rate-delete' rate.id %}">Delete</a></td>
+                    {% endif %}
+
+                {% endif %}
+            </tr>
+        {% endfor %}
 
     </table>
 
