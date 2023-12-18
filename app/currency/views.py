@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 
@@ -152,17 +151,3 @@ class SourceDetailsView(DetailView):
     model = Source
     template_name = 'source_details.html'
     extra_context = {'title': 'Source Details'}
-
-
-class ProfileView(UpdateView):
-    model = get_user_model()
-    template_name = 'profile.html'
-    success_url = reverse_lazy('index')
-    fields = ['first_name',
-              'last_name',
-              ]
-
-    def get_object(self, queryset=None):
-        qs = self.get_queryset()
-
-        return qs.get(id=self.request.user.id)
