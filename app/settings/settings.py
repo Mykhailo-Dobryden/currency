@@ -50,6 +50,8 @@ EXTERNAL_APPS = [
     'debug_toolbar',
     'rangefilter',
     'import_export',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 INTERNAL_APPS = [
@@ -139,6 +141,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -165,6 +173,9 @@ LOGIN_URL = reverse_lazy('login')
 LOGOUT_REDIRECT_URL = reverse_lazy('index')
 LOGOUT_URL = reverse_lazy('index')
 
-
 HTTP_METHOD = 'http'
 DOMAIN = '0.0.0.0:8000'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -11,7 +11,7 @@
         <a href="{% url 'currency:rate-create' %}" class="btn btn-primary">Add rate</a>
     </p>
 
-    <table class="table mt-5 table-bordered table-striped table-hover w-50">
+    <table class="table mt-5 table-bordered table-striped table-hover">
         <thead class="thead-light">
         <tr>
             <th>ID</th>
@@ -19,6 +19,9 @@
             <th>Sell</th>
             <th>Currency</th>
             <th>Source</th>
+            {% if request.user.is_authenticated %}
+                <th>Actions</th>
+            {% endif %}
         </tr>
         </thead>
 
@@ -29,15 +32,26 @@
                 <td>{{ rate.sell }}</td>
                 <td>{{ rate.get_currency_type_display }}</td>
                 <td>{{ rate.source }}</td>
+
                 {% if request.user.is_authenticated %}
-                    <td><a href="{% url 'currency:rate-details' rate.id %}">Details</a></td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Actions
+                            </a>
 
-                    {% if request.user.is_superuser %}
-                        <td><a href="{% url 'currency:rate-update' rate.id %}">Edit</a></td>
-                        <td><a href="{% url 'currency:rate-delete' rate.id %}">Delete</a></td>
-                    {% endif %}
-
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'currency:rate-details' rate.id %}">Details</a>
+                                {% if request.user.is_superuser %}
+                                    <a class="dropdown-item" href="{% url 'currency:rate-update' rate.id %}">Edit</a>
+                                    <a class="dropdown-item" href="{% url 'currency:rate-delete' rate.id %}">Delete</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </td>
                 {% endif %}
+
             </tr>
         {% endfor %}
 
