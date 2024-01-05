@@ -10,6 +10,7 @@
         <thead class="thead-light">
             <tr>
                 <th>ID</th>
+                <th>Logo</th>
                 <th>Name</th>
                 <th>Source URL</th>
                 <th>Created</th>
@@ -17,6 +18,7 @@
         </thead>
         <tr>
             <td>{{ source.id }}</td>
+            <td><img src="{{ source.logo_url }}" alt="{{ source.name }}" width="50" height="50"></td>
             <td>{{ source.name }}</td>
             <td>{{ source.source_url }}</td>
             <td>{{ source.created }}</td>

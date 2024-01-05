@@ -96,23 +96,29 @@ class ContactUsCreateView(CreateView):
         return redirect
 
 
-class ContactUsUpdateView(UpdateView):
+class ContactUsUpdateView(UserPassesTestMixin, UpdateView):
     model = ContactUs
     form_class = ContactUsCreateForm
     success_url = reverse_lazy('currency:contactus-list')
     template_name = 'contact_us_update.html'
     extra_context = {'title': 'Contact Us Update'}
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class ContactUsDeleteView(DeleteView):
+
+class ContactUsDeleteView(UserPassesTestMixin, DeleteView):
     model = ContactUs
     success_url = reverse_lazy('currency:contactus-list')
     template_name = 'contact_us_delete.html'
     context_object_name = 'contact'
     extra_context = {'title': 'Contact Us Delete'}
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class ContactUsDetailsView(DetailView):
+
+class ContactUsDetailsView(LoginRequiredMixin, DetailView):
     model = ContactUs
     template_name = 'contact_us_details.html'
     context_object_name = 'contact'

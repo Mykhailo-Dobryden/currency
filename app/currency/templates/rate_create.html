@@ -1,14 +1,32 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}{{ title }}{% endblock title %}
 
 {% block content %}
     <h1>Rate Create Form</h1>
+    {% crispy form %}
 
-    <form method="post">
-    {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+
+{#    <form method="post">#}
+{#        {% csrf_token %}#}
+{#        <div class="form-row">#}
+{#            <div class="form-group col-md-6 mb-0">#}
+{#                {{ form.buy | as_crispy_field }}#}
+{#            </div>#}
+{#            <div class="form-group col-md-6 mb-0">#}
+{#                {{ form.sell | as_crispy_field }}#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="form-row">#}
+{#            <div class="form-group col-md-6 mb-0">#}
+{#                {{ form.currency_type | as_crispy_field }}#}
+{#            </div>#}
+{#            <div class="form-group col-md-6 mb-0">#}
+{#                {{ form.source | as_crispy_field }}#}
+{#            </div>#}
+{#        </div>#}
+{#    <button type="submit" class="btn btn-primary">Submit</button>#}
+{#    </form>#}
 
 {% endblock content %}

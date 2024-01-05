@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{%  block title %}
+{% block title %}
     {{ title }}
 {% endblock title %}
 
@@ -10,21 +10,33 @@
     </p>
     <table class="table mt-5 table-bordered table-striped table-hover w-50">
         <thead class="thead-light">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Source URL</th>
-            </tr>
+        <tr>
+            <th>ID</th>
+            <th>Logo</th>
+            <th>Name</th>
+            <th>Source URL</th>
+            {% if request.user.is_authenticated %}
+                <th>Actions</th>
+            {% endif %}
+        </tr>
         </thead>
 
         {% for source in object_list %}
             <tr>
                 <td>{{ source.id }}</td>
+                <td><img src="{{ source.logo_url }}" alt="{{ source.name }}" style="height: 50px; width: 50px"></td>
                 <td>{{ source.name }}</td>
                 <td>{{ source.source_url }}</td>
-                <td><a href="{% url 'currency:source-update' source.id %}">Edit</a></td>
-                <td><a href="{% url 'currency:source-delete' source.id %}">Delete</a></td>
-                <td><a href="{% url 'currency:source-details' source.id %}">Details</a></td>
+
+                {% if request.user.is_authenticated %}
+                    <td>
+                        <a href="{% url 'currency:source-details' source.id %}">Details</a>
+                        {% if request.user.is_superuser %}
+                            <a href="{% url 'currency:source-update' source.id %}">Edit</a>
+                            <a href="{% url 'currency:source-delete' source.id %}">Delete</a>
+                        {% endif %}
+                    </td>
+                {% endif %}
             </tr>
 
         {% endfor %}

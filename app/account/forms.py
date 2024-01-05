@@ -5,13 +5,15 @@ from django.core.mail import send_mail
 from django.urls import reverse
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit, Row, Column, Field
 
 User = get_user_model()
 
 
 class UserSignUpForm(forms.ModelForm):
-    password1 = forms.CharField()
-    password2 = forms.CharField()
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -29,6 +31,24 @@ class UserSignUpForm(forms.ModelForm):
             'first_name': _('First name'),
             'last_name': _('Last name'),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column(Field('email', placeholder='Email'), css_class='form-group col-md-6'),
+                css_class='form-row'),
+            Row(
+                Column(Field('password1', placeholder='Password'), css_class='form-group col-md-6'),
+                Column(Field('password2', placeholder='Confirm password'), css_class='form-group col-md-6'),
+                css_class='form-row'),
+            Row(
+                Column(Field('first_name', placeholder='First name'), css_class='form-group col-md-6'),
+                Column(Field('last_name', placeholder='Last name'), css_class='form-group col-md-6'),
+                css_class='form-row'),
+        )
+        self.helper.add_input(Submit('submit', _('Sign up')))
 
     def clean(self):
         cleaned_data: dict = super().clean()
