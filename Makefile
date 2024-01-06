@@ -20,3 +20,5 @@ flake:
 
 worker:
 	cd app && celery -A settings worker -l info --autoscale 1,3
+beat:
+	cd app && celery -A settings beat -l info
