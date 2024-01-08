@@ -18,6 +18,7 @@
             <th>Buy</th>
             <th>Sell</th>
             <th>Currency</th>
+            <th>Date</th>
             <th>Source</th>
             {% if request.user.is_authenticated %}
                 <th>Actions</th>
@@ -31,6 +32,7 @@
                 <td>{{ rate.buy }}</td>
                 <td>{{ rate.sell }}</td>
                 <td>{{ rate.get_currency_type_display }}</td>
+                <td>{{ rate.created }}</td>
                 <td>{{ rate.source }}</td>
 
                 {% if request.user.is_authenticated %}
