@@ -168,21 +168,24 @@ DOMAIN = '0.0.0.0:8000'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
 CELERY_BROKER_URL = 'amqp://localhost'
 # amqp, localhost, port=5672, user=guest, password=guest
 
 CELERY_BEAT_SCHEDULE = {
     'parse_privatbank': {
         'task': 'currency.tasks.parse_privatbank',
-        'schedule': crontab(minute='*/1'),
+        'schedule': crontab(minute='*/15'),
     },
-    'parse_monobank':{
+    'parse_monobank': {
         'task': 'currency.tasks.parse_monobank',
         'schedule': crontab(minute='*/15'),
     },
-    'parse_nbu':{
+    'parse_nbu': {
         'task': 'currency.tasks.parse_nbu',
-        'schedule': crontab(minute='*/1'),
+        'schedule': crontab(minute='*/15'),
+    },
+    'parse_sensebank': {
+        'task': 'currency.tasks.parse_sensebank',
+        'schedule': crontab(minute='*/15'),
     },
 }
