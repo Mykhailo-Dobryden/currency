@@ -20,6 +20,7 @@ class IndexView(TemplateView):
 
 
 class RateListView(ListView):
+    paginate_by = 50
     queryset = Rate.objects.all().select_related('source')
     template_name = 'rate_list.html'
     extra_context = {'title': 'Rate List'}
@@ -60,6 +61,7 @@ class RateDetailsView(LoginRequiredMixin, DetailView):
 
 
 class ContactUsListView(ListView):
+    paginate_by = 3
     queryset = ContactUs.objects.all()
     template_name = 'contact_us_list.html'
     extra_context = {'title': 'Contact Us List'}
@@ -127,6 +129,7 @@ class ContactUsDetailsView(LoginRequiredMixin, DetailView):
 
 
 class SourceListView(ListView):
+    paginate_by = 2
     queryset = Source.objects.all()
     template_name = 'source_list.html'
     extra_context = {'title': 'Source list'}
