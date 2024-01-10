@@ -1,5 +1,6 @@
+from datetime import datetime, timedelta
+
 from django.urls import reverse_lazy
-from django.core.mail import send_mail
 
 from django.views.generic import (ListView, CreateView, UpdateView,
                                   DeleteView, DetailView, TemplateView)
@@ -10,6 +11,7 @@ from currency.forms import (SourceCreateForm,
                             RateCreateForm,
                             ContactUsCreateForm)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from currency.tasks import send_email_in_background
 
 
 class IndexView(TemplateView):
@@ -70,8 +72,6 @@ class ContactUsCreateView(CreateView):
     extra_context = {'title': 'Contact Us Create'}
 
     def _send_email(self):
-        from django.conf import settings
-        recipient = settings.EMAIL_HOST_USER
         subject = 'New Contact Us Message'
         body = f"""
                 Name: {self.object.name}
@@ -80,12 +80,13 @@ class ContactUsCreateView(CreateView):
                 Body: {self.object.body}
                 """
 
-        send_mail(
-            subject=subject,
-            message=body,
-            from_email=recipient,
-            recipient_list=[recipient],
-            fail_silently=False
+        eta = datetime.now() + timedelta(seconds=10)
+        send_email_in_background.apply_async(
+            kwargs={
+                'subject': subject,
+                'body': body,
+            },
+            eta=eta
         )
 
     def form_valid(self, form):

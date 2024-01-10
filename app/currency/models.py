@@ -50,6 +50,7 @@ class Source(models.Model):
     name = models.CharField(_('Name'), max_length=64)
     created = models.DateTimeField(_('Created'), auto_now_add=True, blank=True, null=True)
     logo = models.FileField(_('Logo'), upload_to=source_directory_path, blank=True, null=True)
+    code_name = models.CharField(_('Code name'), max_length=64, unique=True)
 
     class Meta:
         verbose_name = _('Source')

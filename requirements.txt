@@ -6,7 +6,9 @@ django-admin-rangefilter
 django-import-export
 django-crispy-forms
 crispy-bootstrap4==2023.1
-
+Celery
+requests
+beautifulsoup4
 
 #flake8
 flake8
