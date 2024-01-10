@@ -7,7 +7,8 @@ from django.conf import settings
 from celery import shared_task
 
 from currency.choices import CurrencyTypeChoices
-from currency.constants import PRIVATBANK_CODE_NAME, MONOBANK_CODE_NAME, NBU_CODE_NAME, SENSEBANK_CODE_NAME
+from currency.constants import (PRIVATBANK_CODE_NAME, MONOBANK_CODE_NAME,
+                                NBU_CODE_NAME, SENSEBANK_CODE_NAME, currency_codes_iso4217)
 from currency.models import Source, Rate
 from currency.utils import to_2_places_decimal
 
@@ -78,14 +79,16 @@ def parse_monobank():
     rates = response.json()
 
     available_currency_types = {
-        840: CurrencyTypeChoices.USD,
-        978: CurrencyTypeChoices.EUR
+        currency_codes_iso4217['USD']: CurrencyTypeChoices.USD,
+        currency_codes_iso4217['EUR']: CurrencyTypeChoices.EUR
     }
 
     for rate in rates:
         currency_type = rate['currencyCodeA']
 
-        if currency_type not in available_currency_types or rate['currencyCodeB'] != 980:
+        # we need only UAH to USD and UAH to EUR, otherwise we'll receive an EUR to USD rate also and vice versa
+        # look at api.monobank.ua/bank/currency
+        if currency_type not in available_currency_types or rate['currencyCodeB'] != currency_codes_iso4217['UAH']:
             continue
 
         buy = to_2_places_decimal(rate['rateBuy'])
@@ -165,6 +168,16 @@ def parse_sensebank():
         'div', "exchange-rate-tabs__item"
     )
 
+    # Get or create the Source
+    source, _ = Source.objects.get_or_create(code_name=SENSEBANK_CODE_NAME,
+                                             defaults={'name': 'SenseBank',
+                                                       'source_url': sensebank_url})
+
+    available_currency_types = {
+        'USD': CurrencyTypeChoices.USD,
+        'EUR': CurrencyTypeChoices.EUR
+    }
+
     # Initialize an empty list to store the dictionaries of parsed rates
     rates = []
 
@@ -193,16 +206,6 @@ def parse_sensebank():
                 rate['sell'] = sell_rate
 
         rates.append(rate)
-
-        # Get or create the Source
-        source, _ = Source.objects.get_or_create(code_name=SENSEBANK_CODE_NAME,
-                                                 defaults={'name': 'SenseBank',
-                                                           'source_url': sensebank_url})
-
-        available_currency_types = {
-            'USD': CurrencyTypeChoices.USD,
-            'EUR': CurrencyTypeChoices.EUR
-        }
 
         # Iterate over the parsed rates and create the Rate object if it doesn't exist
         for rate in rates:
