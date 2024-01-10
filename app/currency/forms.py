@@ -93,30 +93,3 @@ class ContactUsCreateForm(forms.ModelForm):
                 css_class='form-row'),
         )
         self.helper.add_input(Submit('submit', _('Submit')))
-
-
-# class RateFilterFormHelper(FormHelper):
-#     form_method = "GET"
-#     layout = Layout(
-#         Row(
-#             Column('buy', css_class='form-group col-md-3 mb-0'), css_class='form-row'
-#         ),
-#         Row(
-#             Column('sell', css_class='form-group col-md-3 mb-0'), css_class='form-row'
-#         ),
-#         Row(Column('currency_type', css_class='form-group col-md-3 mb-0'),
-#             Column('source', css_class='form-group col-md-3 mb-0'), css_class='form-row'
-#             ),
-#         Submit('submit', _('Search'))
-#     )
-
-
-# class SourceFilterFormHelper(FormHelper):
-#     form_method = 'GET'
-#
-#     layout = Layout(
-#         Row(Column('name', css_class='form-group col-md-3 mb-0'),
-#             Column('source_url', css_class='form-group col-md-3 mb-0'), css_class='form-row'
-#             ),
-#     )
-#     submit = Submit('submit', _('Search'), css_class='btn btn-primary')
