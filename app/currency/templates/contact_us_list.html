@@ -37,10 +37,6 @@
                 <td>{{ contact.subject }}</td>
                 <td>{{ contact.body }}</td>
 
-{#                <td><a href="{% url 'currency:contactus-update' contact.id %}">Edit</a></td>#}
-{#                <td><a href="{% url 'currency:contactus-delete' contact.id %}">Delete</a></td>#}
-{#                <td><a href="{% url 'currency:contactus-details' contact.id %}">Details</a></td>#}
-
                 {% if request.user.is_authenticated %}
                     <td>
                         <div class="dropdown">

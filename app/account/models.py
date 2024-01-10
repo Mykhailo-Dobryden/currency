@@ -16,6 +16,7 @@ class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     avatar = models.FileField(_('Avatar'), default=None, null=True, blank=True,
                               upload_to=user_directory_path)
+    phone = models.CharField(_('Phone'), max_length=20, default=None, null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

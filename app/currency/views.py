@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import re
 
 from django.urls import reverse_lazy
-from django.views.generic import (ListView, CreateView, UpdateView,
+from django.views.generic import (CreateView, UpdateView,
                                   DeleteView, DetailView, TemplateView)
 
 from django_filters.views import FilterView

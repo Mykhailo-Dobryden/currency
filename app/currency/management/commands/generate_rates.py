@@ -5,8 +5,9 @@ from django.core.management.base import BaseCommand
 from currency.models import Rate, Source
 from currency.choices import CurrencyTypeChoices
 
+
 class Command(BaseCommand):
-    help = 'Genarete 500 random rates'
+    help = 'Genarete 500 random rates'  # noqa
 
     def handle(self, *args, **options):
         source, _ = Source.objects.get_or_create(
