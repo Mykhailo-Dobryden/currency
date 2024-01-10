@@ -23,6 +23,9 @@
             <th>Name</th>
             <th>Subject</th>
             <th>Message</th>
+            {% if request.user.is_authenticated %}
+                <th>Actions</th>
+            {% endif %}
         </tr>
         </thead>
 
@@ -33,9 +36,30 @@
                 <td>{{ contact.name }}</td>
                 <td>{{ contact.subject }}</td>
                 <td>{{ contact.body }}</td>
-                <td><a href="{% url 'currency:contactus-update' contact.id %}">Edit</a></td>
-                <td><a href="{% url 'currency:contactus-delete' contact.id %}">Delete</a></td>
-                <td><a href="{% url 'currency:contactus-details' contact.id %}">Details</a></td>
+
+{#                <td><a href="{% url 'currency:contactus-update' contact.id %}">Edit</a></td>#}
+{#                <td><a href="{% url 'currency:contactus-delete' contact.id %}">Delete</a></td>#}
+{#                <td><a href="{% url 'currency:contactus-details' contact.id %}">Details</a></td>#}
+
+                {% if request.user.is_authenticated %}
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Actions
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'currency:contactus-details' contact.id %}">Details</a>
+                                {% if request.user.is_superuser %}
+                                    <a class="dropdown-item" href="{% url 'currency:contactus-update' contact.id %}">Edit</a>
+                                    <a class="dropdown-item" href="{% url 'currency:contactus-delete' contact.id %}">Delete</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </td>
+                {% endif %}
+
 
             </tr>
         {% endfor %}
