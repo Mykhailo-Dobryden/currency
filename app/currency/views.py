@@ -38,7 +38,6 @@ class RateListView(FilterView):
         # )
 
         context['filter_params'] = re.sub(r'page=\d+', '', query_parameters).lstrip('&')
-
         return context
 
 
