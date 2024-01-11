@@ -1,10 +1,10 @@
-{% load crispy_forms_filters %}
+{#{% load crispy_forms_filters %}#}
 
 <div class="row">
     <div class="col-12">
         <form method="get">
-            {{ filter.form | crispy }}
-            <button type="submit" class="btn btn-primary">Filter</button>
+            {{ filter.form.as_p }}
+            <input type="submit">
         </form>
     </div>
 </div>

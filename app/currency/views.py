@@ -26,11 +26,11 @@ class RateListView(FilterView):
     paginate_by = 50
     queryset = Rate.objects.all().select_related('source')
     template_name = 'rate_list.html'
-    extra_context = {'title': 'Rate List'}
     filterset_class = RateFilter
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
+
         query_parameters = self.request.GET.urlencode()
         # context['filter_params'] = '&'.join(
         #     f'{key}={value}' for key, value in self.request.GET.items()
@@ -38,6 +38,7 @@ class RateListView(FilterView):
         # )
 
         context['filter_params'] = re.sub(r'page=\d+', '', query_parameters).lstrip('&')
+
         return context
 
 
