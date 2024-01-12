@@ -24,7 +24,7 @@ class IndexView(TemplateView):
 
 class RateListView(FilterView):
     paginate_by = 50
-    queryset = Rate.objects.all().select_related('source')
+    queryset = Rate.objects.all().select_related('source').order_by('-created')
     template_name = 'rate_list.html'
     filterset_class = RateFilter
 
@@ -77,7 +77,7 @@ class RateDetailsView(LoginRequiredMixin, DetailView):
 
 class ContactUsListView(FilterView):
     paginate_by = 3
-    queryset = ContactUs.objects.all()
+    queryset = ContactUs.objects.all().order_by('-created')
     template_name = 'contact_us_list.html'
     extra_context = {'title': 'Contact Us List'}
     filterset_class = ContactUsFilter
@@ -152,7 +152,7 @@ class ContactUsDetailsView(LoginRequiredMixin, DetailView):
 
 class SourceListView(FilterView):
     paginate_by = 2
-    queryset = Source.objects.all()
+    queryset = Source.objects.all().order_by('-created')
     template_name = 'source_list.html'
     extra_context = {'title': 'Source list'}
     filterset_class = SourceFilter
