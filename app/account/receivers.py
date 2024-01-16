@@ -13,4 +13,5 @@ def lowercase_user_email(instance, **kwargs):
 
 @receiver(pre_save, sender=User)
 def fix_user_phone_number(instance, **kwargs):
-    instance.phone = re.sub(r'\D', '', instance.phone)
+    if instance.phone is not None:
+        instance.phone = re.sub(r'\D', '', instance.phone)

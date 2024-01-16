@@ -22,6 +22,7 @@ class UserSignUpForm(forms.ModelForm):
                   'password2',
                   'first_name',
                   'last_name',
+                  'phone',
                   ]
 
         labels = {
@@ -30,6 +31,7 @@ class UserSignUpForm(forms.ModelForm):
             'password2': _('Confirm password'),
             'first_name': _('First name'),
             'last_name': _('Last name'),
+            'phone': _('Phone'),
         }
 
     def __init__(self, *args, **kwargs):
