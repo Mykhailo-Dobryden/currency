@@ -11,6 +11,11 @@ Celery
 requests
 beautifulsoup4
 djangorestframework
+djangorestframework-xml
+djangorestframework-yaml
+djangorestframework-simplejwt
+drf-yasg
+setuptools
 
 
 #flake8

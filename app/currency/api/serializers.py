@@ -7,4 +7,4 @@ class RateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Rate
-        fields = ('id', 'created', 'currency_type', 'sell', 'buy')
+        fields = ('id', 'created', 'currency_type', 'sell', 'buy', 'source')
