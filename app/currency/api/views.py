@@ -1,10 +1,12 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.filters import OrderingFilter
 from rest_framework.renderers import JSONRenderer
 from rest_framework_xml.renderers import XMLRenderer
 from rest_framework_yaml.renderers import YAMLRenderer
 from django_filters.rest_framework import DjangoFilterBackend
 
+from currency.api.throttling import RateThrottle
 from currency.api.paginators import RatePagination
 from currency.api.serializers import RateSerializer
 from currency.filters import RateFilter
@@ -28,5 +30,8 @@ class RateViewSet(ModelViewSet):
     filterset_class = RateFilter
     filter_backends = (
         DjangoFilterBackend,
+        OrderingFilter,
     )
+    ordering_fields = ('buy', 'sell', 'created')
+    throttle_classes = (RateThrottle,)
 
