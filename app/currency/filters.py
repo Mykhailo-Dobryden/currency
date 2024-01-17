@@ -19,8 +19,9 @@ class ContactUsFilter(django_filters.FilterSet):
         model = ContactUs
         fields = {
             'name': ['iexact'],
-            'email_from': ['iexact'],
-            'subject': ['iexact'],
+            'email_from': ['iexact',],
+            'subject': ['icontains'],
+            'body': ['icontains'],
         }
 
 

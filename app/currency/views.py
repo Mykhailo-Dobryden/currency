@@ -76,7 +76,7 @@ class RateDetailsView(LoginRequiredMixin, DetailView):
 
 
 class ContactUsListView(FilterView):
-    paginate_by = 3
+    paginate_by = 10
     queryset = ContactUs.objects.all().order_by('-created')
     template_name = 'contact_us_list.html'
     extra_context = {'title': 'Contact Us List'}
