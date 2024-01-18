@@ -42,6 +42,6 @@ class ContactUsSerializer(serializers.ModelSerializer):
             fail_silently=False,
         )
 
-    def save(self, **kwargs):
+    def create(self, validated_data):
         self._send_mail()
-        return super().save(**kwargs)  # TODO: ask about this a teacher
+        return super().create(validated_data)
