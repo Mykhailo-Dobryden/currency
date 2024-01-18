@@ -47,6 +47,9 @@ class UserSignUpForm(forms.ModelForm):
                 Column(Field('first_name', placeholder='First name'), css_class='form-group col-md-6'),
                 Column(Field('last_name', placeholder='Last name'), css_class='form-group col-md-6'),
                 css_class='form-row'),
+            Row(
+                Column(Field('phone', placeholder='Phone'), css_class='form-group col-md-6'),
+            )
         )
         self.helper.add_input(Submit('submit', _('Sign up')))
 

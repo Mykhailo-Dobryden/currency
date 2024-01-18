@@ -1,15 +1,76 @@
 {% extends 'base.html' %}
+{% load crispy_forms_field %}
+{% load crispy_forms_filters %}
+
 
 {% block title %}
     Rates List
 {% endblock title %}
 
 {% block content %}
+
+    {#    Filters    #}
+    <div class="row">
+        <form method="get">
+            <div class="row">
+                <div class="col-md-2">
+                    {{ filter.form.buy | as_crispy_field }}
+                </div>
+                <div class="col-md-2">
+                    {{ filter.form.buy__gt | as_crispy_field}}
+                </div>
+                <div class="col-md-2">
+                    {{ filter.form.buy__lt | as_crispy_field}}
+                </div>
+                <div class="col-md-2">
+                    {{ filter.form.buy__gte | as_crispy_field}}
+                </div>
+                <div class="col-md-2">
+                    {{ filter.form.buy__lte | as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    {{ filter.form.sell | as_crispy_field }}
+                </div>
+                <div class="col-md-2">
+                    {{ filter.form.sell__gt | as_crispy_field}}
+                </div>
+                <div class="col-md-2">
+                    {{ filter.form.sell__lt | as_crispy_field}}
+                </div>
+                <div class="col-md-2">
+                    {{ filter.form.sell__gte | as_crispy_field}}
+                </div>
+                <div class="col-md-2">
+                    {{ filter.form.sell__lte | as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    {{ filter.form.currency_type | as_crispy_field }}
+                </div>
+                <div class="col-md-5">
+                    {{ filter.form.source | as_crispy_field }}
+                </div>
+            </div>
+            <input type="submit">
+        </form>
+    </div>
+
     <h1 class="mt-5">Rates List</h1>
+
 
     <p class="mt-5">
         <a href="{% url 'currency:rate-create' %}" class="btn btn-primary">Add rate</a>
     </p>
+
+    {#    Pagination   #}
+    <div>
+
+        {% include 'includes/pagination.html' %}
+
+    </div>
 
     <table class="table mt-5 table-bordered table-striped table-hover">
         <thead class="thead-light">
@@ -58,5 +119,12 @@
         {% endfor %}
 
     </table>
+
+    {#    Pagination   #}
+    <div>
+
+        {% include 'includes/pagination.html' %}
+
+    </div>
 
 {% endblock content %}

@@ -1,0 +1,51 @@
+{% load currency_tags %}
+
+
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+
+        {% if page_obj.has_previous %}
+
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ filter_params }}" tabindex="-1">Previous</a>
+            </li>
+
+            {#  display that one what is before "previous page"; it's number == current_page.number -2  #}
+            {% if page_obj.previous_page_number|minus:1 != 0 %}
+                <li class="page-item"><a class="page-link"
+                                         href="?page={{ page_obj.previous_page_number|minus:1 }}&{{ filter_params }}">{{ page_obj.previous_page_number|minus:1 }}</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item"><a class="page-link"
+                                     href="?page={{ page_obj.previous_page_number }}&{{ filter_params }}">{{ page_obj.previous_page_number }}</a>
+            </li>
+        {% endif %}
+
+        {# if paginator object has only 1 page -> don't display pagination #}
+        {% if page_obj.paginator.num_pages > 1 %}
+        <li class="page-item active">
+            <a class="page-link" href="">{{ page_obj.number }}</a>
+        </li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+
+            <li class="page-item"><a class="page-link"
+                                     href="?page={{ page_obj.next_page_number }}&{{ filter_params }}">{{ page_obj.next_page_number }}</a>
+            </li>
+
+            {# display number of page, that goes after next page: next_page.number + 1   #}
+            {% if page_obj.next_page_number|add:1 <= page_obj.paginator.num_pages %}
+                <li class="page-item"><a class="page-link"
+                                         href="?page={{ page_obj.next_page_number|add:1 }}&{{ filter_params }}">{{ page_obj.next_page_number|add:"1" }}</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ filter_params }}">Next</a>
+            </li>
+
+        {% endif %}
+    </ul>
+</nav>

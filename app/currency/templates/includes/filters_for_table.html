@@ -1,0 +1,10 @@
+{% load crispy_forms_filters %}
+
+<div class="row">
+    <div class="col-4">
+        <form method="get">
+            {{ filter.form | crispy }}
+            <input type="submit">
+        </form>
+    </div>
+</div>
