@@ -10,6 +10,12 @@ crispy-bootstrap4==2023.1
 Celery
 requests
 beautifulsoup4
+djangorestframework
+djangorestframework-xml
+djangorestframework-yaml
+djangorestframework-simplejwt
+drf-yasg
+setuptools
 
 
 #flake8
