@@ -1,0 +1,57 @@
+[
+  {
+    "model": "currency.source",
+    "pk": 17,
+    "fields": {
+      "source_url": "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json",
+      "name": "NBU",
+      "created": "2024-01-10T12:06:05.279Z",
+      "logo": "",
+      "code_name": "nbu"
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 18,
+    "fields": {
+      "source_url": "https://api.monobank.ua/bank/currency",
+      "name": "MonoBank",
+      "created": "2024-01-10T12:06:05.298Z",
+      "logo": "",
+      "code_name": "monobank"
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 19,
+    "fields": {
+      "source_url": "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5",
+      "name": "PrivatBank",
+      "created": "2024-01-10T12:06:05.315Z",
+      "logo": "",
+      "code_name": "privatbank"
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 20,
+    "fields": {
+      "source_url": "https://sensebank.ua/currency-exchange",
+      "name": "SenseBank",
+      "created": "2024-01-10T12:06:06.340Z",
+      "logo": "",
+      "code_name": "sensebank"
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 21,
+    "fields": {
+      "source_url": "",
+      "name": "Dummy source",
+      "created": "2024-01-10T12:46:12.803Z",
+      "logo": "",
+      "code_name": "dummy"
+    }
+  }
+]

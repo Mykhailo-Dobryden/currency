@@ -36,7 +36,6 @@ def parse_privatbank():
     source, _ = Source.objects.get_or_create(code_name=PRIVATBANK_CODE_NAME,
                                              defaults={'name': 'PrivatBank',
                                                        'source_url': url})
-
     rates = response.json()
 
     available_currency_types = {
