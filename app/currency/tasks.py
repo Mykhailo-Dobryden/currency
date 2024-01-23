@@ -17,7 +17,7 @@ from currency.utils import to_2_places_decimal
     'max_retries': 5
 })
 def send_email_in_background(subject, body):
-    sleep(10)
+
     send_mail(
         subject,
         body,
