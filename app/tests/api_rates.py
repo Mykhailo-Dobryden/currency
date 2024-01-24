@@ -9,6 +9,20 @@ def test_get_rate_list(api_client_auth):
     assert response.json()
 
 
+def test_get_rate_by_id_200(api_client_auth):
+    rate = Rate.objects.create(buy=37.00, sell=38.00, source=Source.objects.first())
+    response = api_client_auth.get(reverse('currency_api:rate-detail', args=(rate.id,)))
+    assert response.status_code == 200
+    assert response.json() == {
+        'id': rate.id,
+        'buy': '37.00',
+        'sell': '38.00',
+        'source': rate.source.id,
+        'currency_type': 'USD',
+        'created': rate.created.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    }
+
+
 def test_post_rate_list_empty_body(api_client_auth):
     response = api_client_auth.post(reverse('currency_api:rate-list'))
     assert response.status_code == 400

@@ -18,9 +18,14 @@ def api_client():
 
 @pytest.fixture(scope='function')
 def api_client_auth(django_user_model):
+    # Running tests without throttling
+    from currency.api.views import ContactUsViewSet, RateViewSet, SourceViewSet
+    ContactUsViewSet.throttle_classes = ()
+    RateViewSet.throttle_classes = ()
+    SourceViewSet.throttle_classes = ()
+
     from rest_framework.test import APIClient
     client = APIClient()
-
     email = 'email@example.com'
     password = 'superSecretPassword'
     user = django_user_model(email=email)
