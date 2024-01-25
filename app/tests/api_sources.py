@@ -108,6 +108,7 @@ def test_put_source_list_200(api_client_auth):
         "code_name": "testsource"
     }
 
+
 def test_put_source_list_404(api_client_auth):
     payload = {
         "name": "TestSourceUpdated",
@@ -117,7 +118,7 @@ def test_put_source_list_404(api_client_auth):
 
     response = api_client_auth.put(reverse('currency_api:source-detail', args=(00,)), data=payload)
     assert response.status_code == 404
-    assert response.json() == {"detail":"Not found."}
+    assert response.json() == {"detail": "Not found."}
 
 
 # PATCH /api/currency/sources/<id>/

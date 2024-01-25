@@ -1,4 +1,3 @@
-from time import sleep
 import requests
 from bs4 import BeautifulSoup
 
@@ -83,20 +82,19 @@ def parse_monobank():
     }
 
     for rate in rates:
-        currency_type = rate['currencyCodeA']
+        currency_code_a = rate['currencyCodeA']
 
         # we need only UAH to USD and UAH to EUR, otherwise we'll receive an EUR to USD rate also and vice versa
         # look at api.monobank.ua/bank/currency
-        if currency_type not in available_currency_types or rate['currencyCodeB'] != currency_codes_iso4217['UAH']:
+        if currency_code_a not in available_currency_types or rate['currencyCodeB'] != currency_codes_iso4217['UAH']:
             continue
 
         buy = to_2_places_decimal(rate['rateBuy'])
         sell = to_2_places_decimal(rate['rateSell'])
 
-        currency_type = available_currency_types[currency_type]
+        currency_type = available_currency_types[currency_code_a]
 
         last_rate = Rate.objects.filter(source=source, currency_type=currency_type).order_by('-created').first()
-
         if last_rate is None or last_rate.buy != buy or last_rate.sell != sell:
             Rate.objects.create(
                 buy=buy,
@@ -135,7 +133,6 @@ def parse_nbu():
         currency_type = available_currency_types[currency_type]
 
         last_rate = Rate.objects.filter(source=source, currency_type=currency_type).order_by('-created').first()
-
         if last_rate is None or last_rate.buy != buy or last_rate.sell != sell:
             Rate.objects.create(
                 buy=buy,

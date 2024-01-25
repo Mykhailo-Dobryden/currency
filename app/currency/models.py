@@ -27,7 +27,8 @@ class Rate(models.Model):
         verbose_name_plural = _('Rates')
 
     def __str__(self):
-        return f'{self.get_currency_type_display()} - {self.created.strftime("%d.%m.%Y %H:%M")}'
+        return (f'{self.source}: {self.get_currency_type_display()}, {self.buy}/{self.sell} '
+                f'{self.created.strftime("%d.%m.%Y %H:%M")}')
 
 
 class ContactUs(models.Model):
