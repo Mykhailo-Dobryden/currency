@@ -23,7 +23,7 @@ from currency.models import Rate, Source, ContactUs
 class RateViewSet(ModelViewSet):
     queryset = Rate.objects.all().order_by('-created')
     serializer_class = RateSerializer
-    renderer_classes = (BrowsableAPIRenderer, JSONRenderer, YAMLRenderer, XMLRenderer)
+    renderer_classes = (JSONRenderer, YAMLRenderer, XMLRenderer, BrowsableAPIRenderer)
     pagination_class = RatePagination
     filterset_class = RateFilter
     filter_backends = (
