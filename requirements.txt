@@ -11,6 +11,7 @@ Celery
 requests
 model-bakery
 beautifulsoup4
+pymemcache
 
 #django rest framework
 djangorestframework

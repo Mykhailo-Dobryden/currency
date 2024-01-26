@@ -12,3 +12,6 @@ currency_codes_iso4217 = {
     'EUR': 978,
     'UAH': 980,
 }
+
+# cache keys
+LATEST_RATES_CACHE_KEY = 'latest_rates'
