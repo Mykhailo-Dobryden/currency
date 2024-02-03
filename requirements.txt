@@ -9,7 +9,10 @@ django-filter
 crispy-bootstrap4==2023.1
 Celery
 requests
+model-bakery
 beautifulsoup4
+
+#django rest framework
 djangorestframework
 djangorestframework-xml
 djangorestframework-yaml
@@ -23,3 +26,9 @@ flake8
 flake8-builtins
 flake8-print
 
+
+#pytest
+pytest
+pytest-django
+pytest-cov
+pytest-mock

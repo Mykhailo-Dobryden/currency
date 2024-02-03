@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 
 
 class RateSerializer(serializers.ModelSerializer):
-    currency_type = serializers.CharField(source='get_currency_type_display')
+    currency_type = serializers.CharField(source='get_currency_type_display', required=False)
 
     class Meta:
         model = Rate
