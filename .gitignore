@@ -5,3 +5,5 @@ __pycache__
 .DS_Store
 *.db
 .coverage
+
+local.py

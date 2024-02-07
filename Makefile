@@ -24,3 +24,5 @@ beat:
 	cd app && celery -A settings beat -l info
 pytest:
 	pytest app/tests --cov=app --cov-report=html && coverage report --fail-under=78
+gunicorn:
+	cd app && gunicorn -w 4 settings.wsgi --timeout 3600 --max-requests 10000 --log-level DEBUG --bind 0.0.0.0:8000
