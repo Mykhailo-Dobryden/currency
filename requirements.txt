@@ -12,6 +12,7 @@ requests
 model-bakery
 beautifulsoup4
 pymemcache
+gunicorn
 
 #django rest framework
 djangorestframework
