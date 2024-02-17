@@ -13,6 +13,9 @@ model-bakery
 beautifulsoup4
 pymemcache
 gunicorn
+psycopg2-binary
+django-environ
+
 
 #django rest framework
 djangorestframework
