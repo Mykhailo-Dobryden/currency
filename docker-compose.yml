@@ -14,13 +14,13 @@ x-defaults: &x-defaults
 services:
   backend:
     <<: *x-defaults
-#    command: python3 ./app/manage.py runserver 0.0.0.0:8000
+    command: python3 ./app/manage.py runserver 0.0.0.0:8000
     container_name: backend
     ports:
 #      - "8000:8000"
       - "8001:8001"  # dev port for breakpoint()
-#    volumes:
-#      - "./:/project/code"
+    volumes:
+      - "./:/project/code"
 
 
   celery:
@@ -32,6 +32,21 @@ services:
     command: celery -A settings beat -l info
     container_name: celerybeat
     <<: *x-defaults
+
+  celery-flower:
+    build: .
+    restart: always
+    env_file: .env
+    command: > 
+      celery --broker=amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@${RABBITMQ_HOST}:${RABBITMQ_PORT}// 
+      flower --basic-auth=${FLOWER_DEFAULT_USER}:${FLOWER_DEFAULT_PASS}
+    container_name: celery-flower
+    ports:
+      - "5555:5555"
+    depends_on:
+      - postgres
+      - rabbitmq
+      - memcached
 
   memcached:
     image: memcached:1.6.23-alpine

@@ -201,6 +201,7 @@ RABBITMQ_PORT = env.str('RABBITMQ_PORT', '5672')
 CELERY_BROKER_URL = f'amqp://{RABBITMQ_USER}:{RABBITMQ_PAAS}@{RABBITMQ_HOST}:{RABBITMQ_PORT}'
 # amqp, localhost, port=5672, user=guest, password=guest
 
+
 CELERY_BEAT_SCHEDULE = {
     'parse_privatbank': {
         'task': 'currency.tasks.parse_privatbank',
