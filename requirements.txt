@@ -15,7 +15,7 @@ pymemcache
 gunicorn
 psycopg2-binary
 django-environ
-
+flower
 
 #django rest framework
 djangorestframework

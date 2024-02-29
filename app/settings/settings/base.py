@@ -156,7 +156,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-STATIC_ROOT = BASE_DIR / 'var/static'
+# STATIC_ROOT = BASE_DIR / 'var/static'
+STATIC_ROOT = '/tmp/static'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / "var/media"
@@ -200,10 +201,11 @@ RABBITMQ_PORT = env.str('RABBITMQ_PORT', '5672')
 CELERY_BROKER_URL = f'amqp://{RABBITMQ_USER}:{RABBITMQ_PAAS}@{RABBITMQ_HOST}:{RABBITMQ_PORT}'
 # amqp, localhost, port=5672, user=guest, password=guest
 
+
 CELERY_BEAT_SCHEDULE = {
     'parse_privatbank': {
         'task': 'currency.tasks.parse_privatbank',
-        'schedule': crontab(minute='*/15'),
+        'schedule': crontab(minute='*/5'),
     },
     'parse_monobank': {
         'task': 'currency.tasks.parse_monobank',
@@ -266,9 +268,12 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
+MEMCACHED_HOST = env.str('MEMCACHED_PORT', 'localhost')
+MEMCACHED_PORT = env.str('MEMCACHED_PORT', '11211')
+
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "127.0.0.1:11211",
+        "LOCATION": f"{MEMCACHED_HOST}:{MEMCACHED_PORT}",
     }
 }
